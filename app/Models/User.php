@@ -19,6 +19,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'login',
         'email',
         'password',
     ];
@@ -41,4 +42,33 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * The relation
+     */
+    public function email_addresses() { return $this->hasMany(EmailAddress::class); }
+
+    /**
+     * The "booting" method of the model
+     * 
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+        self::created(function($user){
+            $user->email_addresses()->create([
+                'email' => $user->email,
+                'is_default' => true,
+                'notify' => true,
+            ]);
+        });
+        self::updated(function($user){
+            if($user->isDirty('email')){
+                $address = $user->email_addresses()->where('is_default', true)->first();
+                $address->email = $user->email;
+                $address->save();
+            }
+        });
+    }
 }
