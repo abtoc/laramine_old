@@ -26,6 +26,13 @@
                         </div>
 
                         <div class="row mb-3">
+                            <label for="login" class="col-md-4 col-form-label text-md-end">{{ __('Login ID') }}</label>
+                            <div class="col-md-6">
+                                <input id="login" type="text" class="form-control @error('login') is-invalid @enderror" name="login" value="{{ old('login') }}" required autocomplete="on">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
                             <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
 
                             <div class="col-md-6">
