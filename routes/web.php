@@ -20,6 +20,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function(){
-    Route::view('/admin', 'admin');
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+});
+
+Route::group(['middleware' => ['auth', 'can:admin']], function(){
+    Route::view('/admin', 'admin')->name('admin');
 });

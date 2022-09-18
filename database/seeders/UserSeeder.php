@@ -19,7 +19,12 @@ class UserSeeder extends Seeder
     {
         User::updateOrCreate(
             ['login' => 'admin'],
-            ['name' => 'Administrator', 'email' => 'admin@example.net', 'password' => Hash::make('admin')]
+            [
+                'name' => 'Administrator',
+                'email' => 'admin@example.net',
+                'password' => Hash::make('admin'),
+                'admin' => true,
+            ]
         );
         $user = User::where('login', 'admin')->first();
     }
