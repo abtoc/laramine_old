@@ -63,6 +63,9 @@
 
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <li>
+                                        <a href="{{ route('users.show', ['user' => Auth::id()])}}" class="dropdown-item">{{ __('Personal data')}}</a>
+                                    </li>
+                                    <li>
                                         <a href="#" class="dropdown-item">{{ __("Personalization") }}</a>
                                     </li>
                                     <li>
@@ -91,7 +94,7 @@
         <main class="d-flex">
             @yield('content')
         </main>
-        <footer class="footer mt-auto">
+        <footer class="footer mt-auto" style="background-color: #e3f2fd;">
             <div class="container">
                 <div class="text-center text-muted fs-6">Powered by Laramine © 2022-2022 abtoc</div>
             </div>
