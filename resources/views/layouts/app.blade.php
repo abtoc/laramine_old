@@ -15,12 +15,13 @@
 
     <!-- Scripts -->
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
     <script src="{{ mix('js/app.js') }}" defer></script>
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
+    <div id="app" class="d-flex flex-column">
+        <nav class="navbar navbar-expand-md navbar-light shadow-sm" style="background-color: #e3f2fd">
+            <div class="container-fluid">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
@@ -50,7 +51,7 @@
                                 </li>
                             @endif
                         @else
-                            <li class="nav-item dropdown">
+                           <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
@@ -73,9 +74,14 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main class="d-flex">
             @yield('content')
         </main>
+        <footer class="footer mt-auto">
+            <div class="container">
+                <div class="text-center text-muted">Powered by Laramine © 2022-2022 abtoc</div>
+            </div>
+        </footer>
     </div>
 </body>
 </html>
