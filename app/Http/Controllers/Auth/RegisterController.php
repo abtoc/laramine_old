@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Enums\UserStatus;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
@@ -72,6 +73,7 @@ class RegisterController extends Controller
             'login' => $data['login'],
             'email' => $data['email'],
             'admin' => false,
+            'status' => UserStatus::REGISTERD,
             'must_change_passwd' => false,
             'password' => Hash::make($data['password']),
         ]);

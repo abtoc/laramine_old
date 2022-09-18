@@ -9,6 +9,7 @@
     "Register":"登録",
     "Update":"更新",
     "Delete":"削除",
+    "Apply":"適用",
     "Name":"名前",
     "Confirm Password":"パスワード(確認用)",
     "Reset Password":"パスワードリセット",
@@ -22,6 +23,8 @@
     "If you did not receive the email":"メールが届いていなければ、",
     "click here to request another":"こちらをクリックして再送信してください。",
 
+    "Please change your password.":"パスワードを変更して下さい",
+
     "Please click the link below to verify your email address.":"メールアドレスを確認するために下のリンクをクリックしてください。",
     "Verify Email Address":"メールアドレス確認",
     "If you did not create an account, no further action is required.":"心当たりがない場合は、本メッセージは破棄してください。",
@@ -32,6 +35,8 @@
 
     "Half-width alphanumeric characters and some symbols can be used.":"半角英数文字と一部の記号が使用できます。",
 
+    "Pending system administrator approval.":"システム管理者の承認待ちです。",
+
     "Project":"プロジェクト",
     "User":"ユーザー",
     "Group":"グループ",
@@ -41,9 +46,18 @@
     "last login at":"最終接続日",
     "Lock":"ロック",
     "Setting":"設定",
+    "Active":"有効にする",
+    "Unlock":"アンロック",
+    "Status":"ステータス",
     "Personalization":"個人設定",
     "Change Password":"パスワード変更",
     "Personal data":"個人情報",
+    "Profile":"プロフィール",
 
-    "New User":"新しいユーザー"
+    "New User":"新しいユーザー",
+
+    "ALL": "全て",
+    "ACTIVE": "有効",
+    "REGISTERD": "登録済",
+    "LOCKED": "ロック"
 } 

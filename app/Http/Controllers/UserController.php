@@ -2,17 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\UserStatus;
 use App\Models\User;
 use App\Rules\LoginRule;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::sortable()->paginate(10);
+        $query = User::sortable();
+        if($request->has('status') and $request->query('status') !== '0'){
+            $query = $query->where('status', (int)($request->query('status')));
+        }
+        if($request->has('name') and $request->query('name') != null){
+            $query = $query->where('name', 'LIKE', '%'.$request->query('name').'%');
+        }
+        $users = $query->paginate(10);
         return view('users.index', compact('users'));
     }
 
@@ -50,17 +59,38 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'login' => ['required', 'string', 'max:255', 'unique:users', new LoginRule()],
+            'login' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($user->id), new LoginRule()],
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('email_addresses')->ignore($user->email_addresses()->where('is_default', '=', true)->first()->id)],
         ]);
         $user->fill($request->all());
         $user->save();
-        return to_route('users.index');
+        return to_route('users.index', $request->query());
     }
 
-    public function destroy(User $user)
+    public function destroy(Request $request, User $user)
     {
-        $user->delete();
-        return to_route('users.index');
+        if(Auth::id() !== $user->id){
+            $user->delete();
+        }
+        return to_route('users.index', $request->query());
+    }
+
+    public function lock(Request $request, User $user)
+    {
+
+        if(Auth::id() !== $user->id){
+            $user->status = UserStatus::LOCKED;
+            $user->save();
+        }
+        return to_route('users.index', $request->query());
+    }
+
+    public function active(Request $request, User $user)
+    {
+        if(Auth::id() !== $user->id){
+            $user->status = UserStatus::ACTIVE;
+            $user->save();
+        }
+        return to_route('users.index', $request->query());
     }
 }

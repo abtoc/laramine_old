@@ -9,7 +9,7 @@
             <a href="#" class="nav-link link-dark"><i class="bi bi-x-diamond"></i> {{ __("Project") }}</a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('users.index', ['sort' => 'created_at', 'direction' => 'asc']) }}" class="nav-link link-dark"><i class="bi bi-person"></i> {{ __("User") }}</a>
+            <a href="{{ route('users.index', ['status' => '1', 'sort' => 'created_at', 'direction' => 'asc']) }}" class="nav-link link-dark"><i class="bi bi-person"></i> {{ __("User") }}</a>
         </li>
         <li class="nav-item">
             <a href="#" class="nav-link link-dark"><i class="bi bi-people"></i> {{ __("Group") }}</a>

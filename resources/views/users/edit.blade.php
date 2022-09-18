@@ -10,13 +10,16 @@
                     <li class="breadcrumb-item active"><span class="fs-4">{{ $user->login }}</span></li>
             </nav>
         </div>
+        <div class="col-4 text-end">
+            <a href="{{ route('users.show', ['user' => $user->id]) }}" class="text-decoration-none link-dark"><i class="bi bi-person"></i> {{ __('Profile') }}</a>
+        </div>
     </div>
      <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card mb-3">
                 <div class="card-header">{{ __('Update') }}</div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('users.update', ['user' => $user->id]) }}">
+                    <form method="POST" action="{{ route('users.update', array_merge(['user' => $user->id], Request::query())) }}">
                         @csrf
  
                         <div class="row mb-3">

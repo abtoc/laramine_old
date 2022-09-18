@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enums\UserStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -24,6 +25,7 @@ class User extends Authenticatable
         'email',
         'password',
         'admin',
+        'status',
         'must_change_passwd',
     ];
 
@@ -43,6 +45,7 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
+        'status' => UserStatus::class,
         'email_verified_at' => 'datetime',
     ];
 
@@ -75,6 +78,25 @@ class User extends Authenticatable
      * The relation
      */
     public function email_addresses() { return $this->hasMany(EmailAddress::class); }
+
+    /**
+     * Accessor
+     */
+
+    public function isActive(): bool
+    {
+        return $this->status === UserStatus::ACTIVE;
+    }
+
+    public function isRegisterd(): bool
+    {
+        return $this->status === UserStatus::REGISTERD;
+    }
+
+    public function isLocked(): bool
+    {
+        return $this->status === UserStatus::LOCKED;
+    }
 
     /**
      * The "booting" method of the model

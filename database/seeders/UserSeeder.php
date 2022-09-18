@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\UserStatus;
 use App\Models\User;
 use App\Models\EmailAddress;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -24,6 +25,7 @@ class UserSeeder extends Seeder
                 'email' => 'admin@example.net',
                 'password' => Hash::make('admin'),
                 'admin' => true,
+                'status' => UserStatus::ACTIVE,
                 'must_change_passwd' => true,
             ]
         );

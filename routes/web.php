@@ -40,5 +40,7 @@ Route::group(['middleware' => ['auth', 'user', 'can:admin']], function(){
         Route::get('{user}/edit', 'edit')->name('edit');
         Route::post('{user}', 'update')->name('update');
         Route::delete('{user}', 'destroy')->name('destroy');
+        Route::post('{user}/lock', 'lock')->name('lock');
+        Route::post('{user}/unlock', 'active')->name('active');
     });
 });
