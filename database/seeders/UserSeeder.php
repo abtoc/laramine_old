@@ -24,6 +24,7 @@ class UserSeeder extends Seeder
                 'email' => 'admin@example.net',
                 'password' => Hash::make('admin'),
                 'admin' => true,
+                'must_change_passwd' => true,
             ]
         );
         $user = User::where('login', 'admin')->first();

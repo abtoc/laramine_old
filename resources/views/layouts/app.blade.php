@@ -61,17 +61,26 @@
                                     {{ Auth::user()->name }}
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <li>
+                                        <a href="#" class="dropdown-item">{{ __("Personalization") }}</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('my.password') }}" class="dropdown-item">{{ __("Change Password") }}</a>
+                                    </li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                            {{ __('Logout') }}
+                                        </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                            @csrf
+                                        </form>
+                                    </li>
+                                </ul>
                             </li>
                         @endguest
                     </ul>
@@ -84,7 +93,7 @@
         </main>
         <footer class="footer mt-auto">
             <div class="container">
-                <div class="text-center text-muted">Powered by Laramine © 2022-2022 abtoc</div>
+                <div class="text-center text-muted fs-6">Powered by Laramine © 2022-2022 abtoc</div>
             </div>
         </footer>
     </div>

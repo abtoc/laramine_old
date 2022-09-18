@@ -23,6 +23,7 @@ class User extends Authenticatable
         'email',
         'password',
         'admin',
+        'must_change_passwd',
     ];
 
     /**
@@ -57,12 +58,21 @@ class User extends Authenticatable
     protected static function boot()
     {
         parent::boot();
+        self::creating(function($user){
+            $user->password_change_at = now();
+        });
         self::created(function($user){
             $user->email_addresses()->create([
                 'email' => $user->email,
                 'is_default' => true,
                 'notify' => true,
             ]);
+        });
+        self::updating(function($user){
+            if($user->isDirty('password')){
+                $user->must_change_passwd = false;
+                $user->password_change_at = now();
+            }
         });
         self::updated(function($user){
             $address = $user->email_addresses()->where('is_default', true)->first();
