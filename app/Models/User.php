@@ -64,11 +64,9 @@ class User extends Authenticatable
             ]);
         });
         self::updated(function($user){
-            if($user->isDirty('email')){
-                $address = $user->email_addresses()->where('is_default', true)->first();
-                $address->email = $user->email;
-                $address->save();
-            }
+            $address = $user->email_addresses()->where('is_default', true)->first();
+            $address->email = $user->email;
+            $address->save();
         });
     }
 }
