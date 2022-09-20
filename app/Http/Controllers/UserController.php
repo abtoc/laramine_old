@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\UserStatus;
 use App\Models\User;
-use App\Rules\LoginRule;
+use App\Rules\IdentiferRule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -34,7 +34,7 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'login' => ['required', 'string', 'max:255', 'unique:users', new LoginRule()],
+            'login' => ['required', 'string', 'max:255', 'unique:users', new IdentiferRule()],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:email_addresses'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -42,7 +42,7 @@ class UserController extends Controller
         $user->fill($request->all());
         $user->password = Hash::make($request->input('password'));
         $user->save();
-        return to_route('users.index');
+        return to_route('users.index', $request->query());
     }
 
     public function show(User $user)

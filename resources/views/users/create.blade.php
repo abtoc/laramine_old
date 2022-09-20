@@ -6,7 +6,7 @@
         <div class="col-4">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('users.index') }}"><span class="fs-4">ユーザー</span></a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('users.index', Request::query()) }}"><span class="fs-4">ユーザー</span></a></li>
                     <li class="breadcrumb-item active"><span class="fs-4">{{ __('New User') }}</span></li>
             </nav>
         </div>
@@ -16,7 +16,7 @@
             <div class="card mb-3">
                 <div class="card-header">{{ __('Register') }}</div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('users.store') }}">
+                    <form method="POST" action="{{ route('users.store', Request::query()) }}">
                         @csrf
  
                         <div class="row mb-3">

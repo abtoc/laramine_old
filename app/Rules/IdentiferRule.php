@@ -4,7 +4,7 @@ namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 
-class LoginRule implements Rule
+class IdentiferRule implements Rule
 {
     /**
      * Create a new rule instance.

@@ -15,7 +15,7 @@
             </nav>
         </div>
         <div class="col-4 text-end">
-            <a href="{{ route('users.create') }}" class="text-decoration-none link-dark"><i class="bi bi-person-plus"></i> {{ __('New User') }}</a>
+            <a href="{{ route('users.create', Request::query()) }}" class="text-decoration-none link-dark"><i class="bi bi-person-plus"></i> {{ __('New User') }}</a>
         </div>
     </div>
     <form action="{{ route('users.index')}}" class="row g-1 mb-3">
