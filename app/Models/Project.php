@@ -41,5 +41,6 @@ class Project extends Model
         'created_at',
     ];
 
+    public function parent()  { return $this->hasOne(Project::class, 'id', 'parent_id'); }
     public function members() { return $this->hasMany(Member::class); }
 }
