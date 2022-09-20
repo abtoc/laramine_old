@@ -52,13 +52,19 @@
         </thead>
         <tbody>
             @foreach($users as $user)
-                <tr class="@if(!$user->isActive()) text-muted @endif">
-                    <td class="align-middle"><a href="{{ route('users.edit', array_merge(['user' => $user->id], Request::query())) }}">{{ $user->login }}</a></td>
-                    <td class="align-middle">{{ $user->name }}</td>
-                    <td class="align-middle">{{ $user->email }}</td>
+                <tr>
+                    <td class="align-middle">
+                        <a href="{{ route('users.edit', array_merge(['user' => $user->id], Request::query())) }}" class="@if(!$user->isActive()) link-secondary @endif">
+                            {{ $user->login }}
+                        </a>
+                    </td>
+                    <td class="align-middle"><span class="@if(!$user->isActive()) text-muted @endif">{{ $user->name }}</span></td>
+                    <td class="align-middle">
+                        <a href="mailto:{{ $user->email }}" class="@if(!$user->isActive()) link-secondary @endif">{{ $user->email }}</a>
+                    </td>
                     <td class="text-center align-middle">@if($user->admin) <i class="bi-check"></i> @endif</td>
-                    <td class="text-center align-middle">@datetime($user->created_at)</td>
-                    <td class="text-center align-middle">@datetime($user->last_login_at)</td>
+                    <td class="text-center align-middle"><span class="@if(!$user->isActive()) text-muted @endif">@datetime($user->created_at)<span></td>
+                    <td class="text-center align-middle"><span class="@if(!$user->isActive()) text-muted @endif">@datetime($user->last_login_at)</span></td>
                     <td class="text-end align-middle">
                         @if(Auth::id() !== $user->id)
                             @if($user->isActive())
