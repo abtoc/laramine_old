@@ -59,5 +59,7 @@
     "ALL": "全て",
     "ACTIVE": "有効",
     "REGISTERD": "登録済",
-    "LOCKED": "ロック"
+    "LOCKED": "ロック",
+    "CLOSED": "終了",
+    "ARCHIVED":"アーカイブ"
 } 
