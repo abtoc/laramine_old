@@ -78,6 +78,7 @@ class User extends Authenticatable
      * The relation
      */
     public function email_addresses() { return $this->hasMany(EmailAddress::class); }
+    public function members() { return $this->hasMany(Member::class); }
 
     /**
      * Accessor
