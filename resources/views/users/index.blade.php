@@ -52,7 +52,7 @@
         </thead>
         <tbody>
             @foreach($users as $user)
-                <tr>
+                <tr class="@if(!$user->isActive()) text-muted @endif">
                     <td class="align-middle"><a href="{{ route('users.edit', array_merge(['user' => $user->id], Request::query())) }}">{{ $user->login }}</a></td>
                     <td class="align-middle">{{ $user->name }}</td>
                     <td class="align-middle">{{ $user->email }}</td>
