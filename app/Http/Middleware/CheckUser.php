@@ -20,7 +20,7 @@ class CheckUser
      */
     public function handle(Request $request, Closure $next)
     {
-        if($request->user()->must_change_passwd){
+        if($request->user()->must_change_password){
             Alert::warning(__('Please change your password.'));
             Alert::flash();
             return to_route('my.password');

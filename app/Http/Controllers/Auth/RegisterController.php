@@ -74,7 +74,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'admin' => false,
             'status' => UserStatus::REGISTERD,
-            'must_change_passwd' => false,
+            'must_change_password' => false,
             'password' => Hash::make($data['password']),
         ]);
     }

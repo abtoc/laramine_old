@@ -26,7 +26,7 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('admin'),
                 'admin' => true,
                 'status' => UserStatus::ACTIVE,
-                'must_change_passwd' => true,
+                'must_change_password' => true,
             ]
         );
         $user = User::where('login', 'admin')->first();

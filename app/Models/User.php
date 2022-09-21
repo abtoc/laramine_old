@@ -119,7 +119,7 @@ class User extends Authenticatable
         });
         self::updating(function($user){
             if($user->isDirty('password')){
-                $user->must_change_passwd = false;
+                $user->must_change_password = false;
                 $user->password_change_at = now();
             }
         });

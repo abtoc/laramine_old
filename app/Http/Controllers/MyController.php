@@ -19,7 +19,7 @@ class MyController extends Controller
     {
         $request->validate([
             'password' => 'required',
-            'new_password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'new_password' => ['required', 'confirmed', 'different:password', Rules\Password::defaults()],
         ]); 
 
         $user = Auth::user();
