@@ -12,7 +12,7 @@
             <a href="{{ route('users.index', ['status' => '1', 'sort' => 'created_at', 'direction' => 'asc']) }}" class="nav-link link-dark"><i class="bi bi-person"></i> {{ __("User") }}</a>
         </li>
         <li class="nav-item">
-            <a href="#" class="nav-link link-dark"><i class="bi bi-people"></i> {{ __("Group") }}</a>
+            <a href="{{ route('groups.index') }}" class="nav-link link-dark"><i class="bi bi-people"></i> {{ __("Group") }}</a>
         </li>
         <li class="nav-item">
             <a href="#" class="nav-link link-dark"><i class="bi bi-gear"></i> {{ __("Setting") }}</a>

@@ -6,8 +6,9 @@
         <div class="col-4">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('users.index', Request::query()) }}"><span class="fs-4">ユーザー</span></a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('users.index', Request::query()) }}"><span class="fs-4">{{ __("User") }}</span></a></li>
                     <li class="breadcrumb-item active"><span class="fs-4">{{ $user->login }}</span></li>
+                </ol>
             </nav>
         </div>
         <div class="col-4 text-end">

@@ -15,7 +15,7 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
-        $query = User::where('type', UserType::USER);
+        $query = User::whereType(UserType::USER);
         if($request->has('status') and $request->query('status') !== '0'){
             $query = $query->where('status', (int)($request->query('status')));
         }

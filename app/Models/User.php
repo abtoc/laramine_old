@@ -7,6 +7,7 @@ use App\Enums\UserStatus;
 use App\Enums\UserType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Kyslik\ColumnSortable\Sortable;
@@ -86,6 +87,16 @@ class User extends Authenticatable
      * Accessor
      */
 
+    public function isUser(): bool
+    {
+        return $this->type === UserType::USER;
+    }
+
+    public function isGroup(): bool
+    {
+        return $this->type === UserType::GROUP;
+    }
+
     public function isActive(): bool
     {
         return $this->status === UserStatus::ACTIVE;
@@ -110,14 +121,24 @@ class User extends Authenticatable
     {
         parent::boot();
         self::creating(function($user){
-            $user->password_change_at = now();
+            if($user->type === UserType::USER){
+                $user->password_change_at = now();
+            } elseif($user->type === UserType::GROUP){
+                $user->login = base64_encode($user->name);
+                $user->email = base64_encode($user->name);
+                $user->password = Hash::make($user->name);
+                $user->status = UserStatus::ACTIVE;
+                $user->must_change_password = false;
+            }
         });
         self::created(function($user){
-            $user->email_addresses()->create([
-                'email' => $user->email,
-                'is_default' => true,
-                'notify' => true,
-            ]);
+            if($user->type === UserType::USER){
+                $user->email_addresses()->create([
+                    'email' => $user->email,
+                    'is_default' => true,
+                    'notify' => true,
+                ]);
+            }
         });
         self::updating(function($user){
             if($user->isDirty('password')){
@@ -127,7 +148,7 @@ class User extends Authenticatable
         });
         self::updated(function($user){
             if($user->type === UserType::USER){
-                $address = $user->email_addresses()->where('is_default', true)->first();
+                $address = $user->email_addresses()->whereIsDefault(true)->first();
                 $address->email = $user->email;
                 $address->save();
             }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GroupController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MyController;
 use App\Http\Controllers\UserController;
@@ -42,5 +43,15 @@ Route::group(['middleware' => ['auth', 'user', 'can:admin']], function(){
         Route::delete('{user}', 'destroy')->name('destroy');
         Route::post('{user}/lock', 'lock')->name('lock');
         Route::post('{user}/unlock', 'active')->name('active');
+    });
+    Route::controller(GroupController::class)->prefix('groups')->name('groups.')->group(function(){
+        Route::get('/', 'index')->name('index');
+        Route::get('create', 'create')->name('create');
+        Route::post('/', 'store')->name('store');
+        Route::get('{user}/edit', 'edit')->name('edit');
+        Route::post('{user}', 'update')->name('update');
+        Route::delete('{user}', 'destroy')->name('destroy');
+        Route::get('{user}/users', 'users')->name('users');
+        Route::delete('{user}/users/{id}', 'users_destroy')->name('users.destroy');
     });
 });

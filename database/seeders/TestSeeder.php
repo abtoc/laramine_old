@@ -66,7 +66,7 @@ class TestSeeder extends Seeder
                 ['login' => $user['login']],
                 $user,
             );
-            $_user = User::where('login', $user['login'])->first();
+            $_user = User::whereLogin($user['login'])->first();
             $_user->must_change_password = $user['must_change_password'];
             $_user->save();
         }
@@ -99,7 +99,7 @@ class TestSeeder extends Seeder
         ];
         foreach($projects as $project){
             if(!is_null($project["parent_identifer"])){
-                $parent = Project::where("identifer", $project["parent_identifer"])->first();
+                $parent = Project::whereIdentifer($project["parent_identifer"])->first();
                 if(!is_null($parent)){
                     $project["parent_id"] = $parent->id;
                 }
