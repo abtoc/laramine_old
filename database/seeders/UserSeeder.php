@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
             ['login' => 'admin'],
             [
                 'type' => UserType::USER,
-                'name' => 'Administrator',
+                'name' => __('Administrator'),
                 'email' => 'admin@example.net',
                 'password' => Hash::make('admin'),
                 'admin' => true,
