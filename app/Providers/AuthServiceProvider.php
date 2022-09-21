@@ -3,7 +3,11 @@
 namespace App\Providers;
 
 use App\Models\Project;
+use App\Models\User;
 use App\Policies\ProjectPolicy;
+use App\Policies\UserPolicy;
+use GuzzleHttp\Psr7\Response;
+use Illuminate\Auth\Access\Response as ResponseResult;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -17,6 +21,7 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
         Project::class => ProjectPolicy::class,
+        User::class => UserPolicy::class,
     ];
 
     /**
@@ -30,7 +35,9 @@ class AuthServiceProvider extends ServiceProvider
 
         // 管理者権限
         Gate::define('admin', function($user){
-            return $user->admin;
+            return $user->admin
+                ? ResponseResult::allow()
+                : ResponseResult::denyAsNotFound();
         });        
     }
 }

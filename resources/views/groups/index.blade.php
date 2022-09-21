@@ -35,6 +35,7 @@
     <table class="table bg-white w-100">
         <thead>
             <th class="text-center">{{ __('Name') }}</th>
+            <th class="text-center">{{ __('Group')}}</th>
             <th></th>
         </thead>
         <tbody>
@@ -44,6 +45,9 @@
                         <a href="{{ route('groups.edit', array_merge(['user' => $user->id], Request::query())) }}" class="@if(!$user->isActive()) link-secondary @endif">
                             {{ $user->name }}
                         </a>
+                    </td>
+                    <td class="align-middle text-center">
+                        <span class="@if(!$user->isActive()) text-muted @endif">{{ $user->users->count() }}</span>
                     </td>
                     <td class="text-end align-middle">
                         @if($user->isGroup())

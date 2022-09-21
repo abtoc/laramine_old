@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\Project;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Auth\Access\Response;
 
 class ProjectPolicy
 {
@@ -41,7 +42,9 @@ class ProjectPolicy
      */
     public function create(User $user)
     {
-        return $user->admin;
+        return $user->admin
+            ? Response::allow()
+            : Response::denyAsNotFound();
     }
 
     /**
@@ -53,7 +56,9 @@ class ProjectPolicy
      */
     public function update(User $user, Project $project)
     {
-        return $user->admin;
+        return $user->admin
+            ? Response::allow()
+            : Response::denyAsNotFound();
     }
 
     /**
@@ -65,7 +70,9 @@ class ProjectPolicy
      */
     public function delete(User $user, Project $project)
     {
-        return $user->admin;
+        return $user->admin
+            ? Response::allow()
+            : Response::denyAsNotFound();
     }
 
     /**
@@ -77,7 +84,9 @@ class ProjectPolicy
      */
     public function restore(User $user, Project $project)
     {
-        return $user->admin;
+        return $user->admin
+            ? Response::allow()
+            : Response::denyAsNotFound();
     }
 
     /**
@@ -89,6 +98,8 @@ class ProjectPolicy
      */
     public function forceDelete(User $user, Project $project)
     {
-        return $user->admin;
+        return $user->admin
+            ? Response::allow()
+            : Response::denyAsNotFound();
     }
 }

@@ -80,6 +80,8 @@ class User extends Authenticatable
      /**
      * The relation
      */
+    public function users()  { return $this->belongsToMany(User::class, 'groups_users', 'group_id', 'user_id'); }
+    public function groups() { return $this->belongsToMany(User::class, 'groups_users', 'user_id', 'group_id');  }
     public function email_addresses() { return $this->hasMany(EmailAddress::class); }
     public function members() { return $this->hasMany(Member::class); }
 

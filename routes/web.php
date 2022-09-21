@@ -26,6 +26,7 @@ Auth::routes();
 Route::group(['middleware' => 'auth'], function(){
     Route::group(['middleware' => 'user'], function(){
         Route::get('/home', [HomeController::class, 'index'])->name('home');
+        Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show')->middleware('can:view,user');
     });
     Route::get('/my/password', [MyController::class, 'password'])->name('my.password');
     Route::post('/my/password', [MyController::class, 'password_update'])->name('my.password.update');
@@ -37,7 +38,6 @@ Route::group(['middleware' => ['auth', 'user', 'can:admin']], function(){
         Route::get('/', 'index')->name('index');
         Route::get('create', 'create')->name('create');
         Route::post('/', 'store')->name('store');
-        Route::get('{user}', 'show')->name('show');
         Route::get('{user}/edit', 'edit')->name('edit');
         Route::post('{user}', 'update')->name('update');
         Route::delete('{user}', 'destroy')->name('destroy');

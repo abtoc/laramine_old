@@ -6,6 +6,7 @@ use App\Enums\UserStatus;
 use App\Enums\UserType;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class GroupController extends Controller
@@ -78,8 +79,9 @@ class GroupController extends Controller
         return view('groups.users', compact('user'));
     }
 
-    public function users_destroy(Request $request, User $user, $user_id)
+    public function users_destroy(Request $request, User $user, $id)
     {
-        return to_route('groups.users', array_merge(['user' => $user_id], $request->query()));
+        DB::table('groups_users')->where('group_id', $user->id)->where('user_id',  $id)->delete();
+        return to_route('groups.users', array_merge(['user' => $user->id], $request->query()));
     }
 }

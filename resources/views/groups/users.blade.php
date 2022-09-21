@@ -19,14 +19,40 @@
             <div class="card mb-3">
                 <div class="card-header">{{ __('Update') }}</div>
                 <div class="card-body">
-                    <ul class="nav nav-tabs mb-3">
-                        <li class="nav-item">
-                            <a href="{{ route('groups.edit', array_merge(['user' => $user->id], Request::query())) }}" class="nav-link">全般</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('groups.users',  array_merge(['user'=> $user->id], Request::query())) }}" class="nav-link active">ユーザー</a>
-                        </li>
-                    </ul>
+                    <div class="row mb-3">
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <a href="{{ route('groups.edit', array_merge(['user' => $user->id], Request::query())) }}" class="nav-link">全般</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('groups.users',  array_merge(['user'=> $user->id], Request::query())) }}" class="nav-link active">ユーザー</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="row">
+                        <table class="table w-100">
+                            <thead>
+                                <th class="text-center">{{ __('User') }}</th>
+                                <th></th>
+                            </thead>
+                            <tbody>
+                                @foreach($user->users as $u)
+                                    <tr>
+                                        <td class="align-middle">
+                                            <a href="{{ route('users.show', ['user' => $u->id]) }}">{{ $u->name }}</a>
+                                        </td>
+                                        <td class="text-end">
+                                            <form method="POST" class="d-inline p-0" action="{{ route('groups.users.destroy', ['user' => $user->id, 'id' => $u->id]) }}">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn btn-none" type="submit"><i class="bi bi-trash"></i>{{ __('Delete') }}</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

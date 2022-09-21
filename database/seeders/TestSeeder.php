@@ -9,6 +9,7 @@ use App\Models\Project;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class TestSeeder extends Seeder
@@ -28,37 +29,37 @@ class TestSeeder extends Seeder
         $password = Hash::make("P@ssw0rd");
         $user_template = ['type' => UserType::USER, 'password' => $password, ];
         $users = [
-            array_merge($user_template, ['name' => 'テストユーザ01', 'login' => 'hoge01', 'email' => 'hoge01@hogehoge.com', 'status' => UserStatus::ACTIVE,    'must_change_password' => true],),
-            array_merge($user_template, ['name' => 'テストユーザ02', 'login' => 'hoge02', 'email' => 'hoge02@hogehoge.com', 'status' => UserStatus::ACTIVE,    'must_change_password' => true],),
-            array_merge($user_template, ['name' => 'テストユーザ03', 'login' => 'hoge03', 'email' => 'hoge03@hogehoge.com', 'status' => UserStatus::ACTIVE,    'must_change_password' => true],),
-            array_merge($user_template, ['name' => 'テストユーザ04', 'login' => 'hoge04', 'email' => 'hoge04@hogehoge.com', 'status' => UserStatus::ACTIVE,    'must_change_password' => true],),
-            array_merge($user_template, ['name' => 'テストユーザ05', 'login' => 'hoge05', 'email' => 'hoge05@hogehoge.com', 'status' => UserStatus::ACTIVE,    'must_change_password' => true],),
-            array_merge($user_template, ['name' => 'テストユーザ06', 'login' => 'hoge06', 'email' => 'hoge06@hogehoge.com', 'status' => UserStatus::ACTIVE,    'must_change_password' => true],),
-            array_merge($user_template, ['name' => 'テストユーザ07', 'login' => 'hoge07', 'email' => 'hoge07@hogehoge.com', 'status' => UserStatus::ACTIVE,    'must_change_password' => true],),
-            array_merge($user_template, ['name' => 'テストユーザ08', 'login' => 'hoge08', 'email' => 'hoge08@hogehoge.com', 'status' => UserStatus::ACTIVE,    'must_change_password' => true],),
-            array_merge($user_template, ['name' => 'テストユーザ09', 'login' => 'hoge09', 'email' => 'hoge09@hogehoge.com', 'status' => UserStatus::ACTIVE,    'must_change_password' => true],),
-            array_merge($user_template, ['name' => 'テストユーザ10', 'login' => 'hoge10', 'email' => 'hoge10@hogehoge.com', 'status' => UserStatus::ACTIVE,    'must_change_password' => true],),
-            array_merge($user_template, ['name' => 'テストユーザ11', 'login' => 'hoge11', 'email' => 'hoge11@hogehoge.com', 'status' => UserStatus::ACTIVE,    'must_change_password' => true],),
-            array_merge($user_template, ['name' => 'テストユーザ12', 'login' => 'hoge12', 'email' => 'hoge12@hogehoge.com', 'status' => UserStatus::ACTIVE,    'must_change_password' => true],),
-            array_merge($user_template, ['name' => 'テストユーザ13', 'login' => 'hoge13', 'email' => 'hoge13@hogehoge.com', 'status' => UserStatus::ACTIVE,    'must_change_password' => true],),
-            array_merge($user_template, ['name' => 'テストユーザ14', 'login' => 'hoge14', 'email' => 'hoge14@hogehoge.com', 'status' => UserStatus::ACTIVE,    'must_change_password' => true],),
-            array_merge($user_template, ['name' => 'テストユーザ15', 'login' => 'hoge15', 'email' => 'hoge15@hogehoge.com', 'status' => UserStatus::ACTIVE,    'must_change_password' => true],),
-            array_merge($user_template, ['name' => 'テストユーザ16', 'login' => 'hoge16', 'email' => 'hoge16@hogehoge.com', 'status' => UserStatus::ACTIVE,    'must_change_password' => true],),
-            array_merge($user_template, ['name' => 'テストユーザ17', 'login' => 'hoge17', 'email' => 'hoge17@hogehoge.com', 'status' => UserStatus::ACTIVE,    'must_change_password' => false],),
-            array_merge($user_template, ['name' => 'テストユーザ18', 'login' => 'hoge18', 'email' => 'hoge18@hogehoge.com', 'status' => UserStatus::ACTIVE,    'must_change_password' => false],),
-            array_merge($user_template, ['name' => 'テストユーザ19', 'login' => 'hoge19', 'email' => 'hoge19@hogehoge.com', 'status' => UserStatus::ACTIVE,    'must_change_password' => false],),
-            array_merge($user_template, ['name' => 'テストユーザ20', 'login' => 'hoge20', 'email' => 'hoge20@hogehoge.com', 'status' => UserStatus::ACTIVE,    'must_change_password' => false],),
-            array_merge($user_template, ['name' => 'テストユーザ21', 'login' => 'hoge20', 'email' => 'hoge21@hogehoge.com', 'status' => UserStatus::ACTIVE,    'must_change_password' => false],),
-            array_merge($user_template, ['name' => 'テストユーザ22', 'login' => 'hoge21', 'email' => 'hoge22@hogehoge.com', 'status' => UserStatus::REGISTERD, 'must_change_password' => true],),
-            array_merge($user_template, ['name' => 'テストユーザ23', 'login' => 'hoge22', 'email' => 'hoge23@hogehoge.com', 'status' => UserStatus::REGISTERD, 'must_change_password' => true],),
-            array_merge($user_template, ['name' => 'テストユーザ24', 'login' => 'hoge23', 'email' => 'hoge24@hogehoge.com', 'status' => UserStatus::REGISTERD, 'must_change_password' => true],),
-            array_merge($user_template, ['name' => 'テストユーザ25', 'login' => 'hoge24', 'email' => 'hoge25@hogehoge.com', 'status' => UserStatus::REGISTERD, 'must_change_password' => false],),
-            array_merge($user_template, ['name' => 'テストユーザ26', 'login' => 'hoge25', 'email' => 'hoge26@hogehoge.com', 'status' => UserStatus::REGISTERD, 'must_change_password' => false],),
-            array_merge($user_template, ['name' => 'テストユーザ27', 'login' => 'hoge26', 'email' => 'hoge27@hogehoge.com', 'status' => UserStatus::LOCKED,    'must_change_password' => true],),
-            array_merge($user_template, ['name' => 'テストユーザ28', 'login' => 'hoge27', 'email' => 'hoge28@hogehoge.com', 'status' => UserStatus::LOCKED,    'must_change_password' => true],),
-            array_merge($user_template, ['name' => 'テストユーザ29', 'login' => 'hoge28', 'email' => 'hoge29@hogehoge.com', 'status' => UserStatus::LOCKED,    'must_change_password' => true],),
-            array_merge($user_template, ['name' => 'テストユーザ30', 'login' => 'hoge29', 'email' => 'hoge30@hogehoge.com', 'status' => UserStatus::LOCKED,    'must_change_password' => false],),
-            array_merge($user_template, ['name' => 'テストユーザ31', 'login' => 'hoge30', 'email' => 'hoge31@hogehoge.com', 'status' => UserStatus::LOCKED,    'must_change_password' => false],),
+            array_merge($user_template, ['name' => 'テストユーザ01', 'login' => 'test01', 'email' => 'test01@testtest.com', 'status' => UserStatus::ACTIVE,    'must_change_password' => true],),
+            array_merge($user_template, ['name' => 'テストユーザ02', 'login' => 'test02', 'email' => 'test02@testtest.com', 'status' => UserStatus::ACTIVE,    'must_change_password' => true],),
+            array_merge($user_template, ['name' => 'テストユーザ03', 'login' => 'test03', 'email' => 'test03@testtest.com', 'status' => UserStatus::ACTIVE,    'must_change_password' => true],),
+            array_merge($user_template, ['name' => 'テストユーザ04', 'login' => 'test04', 'email' => 'test04@testtest.com', 'status' => UserStatus::ACTIVE,    'must_change_password' => true],),
+            array_merge($user_template, ['name' => 'テストユーザ05', 'login' => 'test05', 'email' => 'test05@testtest.com', 'status' => UserStatus::ACTIVE,    'must_change_password' => true],),
+            array_merge($user_template, ['name' => 'テストユーザ06', 'login' => 'test06', 'email' => 'test06@testtest.com', 'status' => UserStatus::ACTIVE,    'must_change_password' => true],),
+            array_merge($user_template, ['name' => 'テストユーザ07', 'login' => 'test07', 'email' => 'test07@testtest.com', 'status' => UserStatus::ACTIVE,    'must_change_password' => true],),
+            array_merge($user_template, ['name' => 'テストユーザ08', 'login' => 'test08', 'email' => 'test08@testtest.com', 'status' => UserStatus::ACTIVE,    'must_change_password' => true],),
+            array_merge($user_template, ['name' => 'テストユーザ09', 'login' => 'test09', 'email' => 'test09@testtest.com', 'status' => UserStatus::ACTIVE,    'must_change_password' => true],),
+            array_merge($user_template, ['name' => 'テストユーザ10', 'login' => 'test10', 'email' => 'test10@testtest.com', 'status' => UserStatus::ACTIVE,    'must_change_password' => true],),
+            array_merge($user_template, ['name' => 'テストユーザ11', 'login' => 'test11', 'email' => 'test11@testtest.com', 'status' => UserStatus::ACTIVE,    'must_change_password' => true],),
+            array_merge($user_template, ['name' => 'テストユーザ12', 'login' => 'test12', 'email' => 'test12@testtest.com', 'status' => UserStatus::ACTIVE,    'must_change_password' => true],),
+            array_merge($user_template, ['name' => 'テストユーザ13', 'login' => 'test13', 'email' => 'test13@testtest.com', 'status' => UserStatus::ACTIVE,    'must_change_password' => true],),
+            array_merge($user_template, ['name' => 'テストユーザ14', 'login' => 'test14', 'email' => 'test14@testtest.com', 'status' => UserStatus::ACTIVE,    'must_change_password' => true],),
+            array_merge($user_template, ['name' => 'テストユーザ15', 'login' => 'test15', 'email' => 'test15@testtest.com', 'status' => UserStatus::ACTIVE,    'must_change_password' => true],),
+            array_merge($user_template, ['name' => 'テストユーザ16', 'login' => 'test16', 'email' => 'test16@testtest.com', 'status' => UserStatus::ACTIVE,    'must_change_password' => true],),
+            array_merge($user_template, ['name' => 'テストユーザ17', 'login' => 'test17', 'email' => 'test17@testtest.com', 'status' => UserStatus::ACTIVE,    'must_change_password' => false],),
+            array_merge($user_template, ['name' => 'テストユーザ18', 'login' => 'test18', 'email' => 'test18@testtest.com', 'status' => UserStatus::ACTIVE,    'must_change_password' => false],),
+            array_merge($user_template, ['name' => 'テストユーザ19', 'login' => 'test19', 'email' => 'test19@testtest.com', 'status' => UserStatus::ACTIVE,    'must_change_password' => false],),
+            array_merge($user_template, ['name' => 'テストユーザ20', 'login' => 'test20', 'email' => 'test20@testtest.com', 'status' => UserStatus::ACTIVE,    'must_change_password' => false],),
+            array_merge($user_template, ['name' => 'テストユーザ21', 'login' => 'test20', 'email' => 'test21@testtest.com', 'status' => UserStatus::ACTIVE,    'must_change_password' => false],),
+            array_merge($user_template, ['name' => 'テストユーザ22', 'login' => 'test21', 'email' => 'test22@testtest.com', 'status' => UserStatus::REGISTERD, 'must_change_password' => true],),
+            array_merge($user_template, ['name' => 'テストユーザ23', 'login' => 'test22', 'email' => 'test23@testtest.com', 'status' => UserStatus::REGISTERD, 'must_change_password' => true],),
+            array_merge($user_template, ['name' => 'テストユーザ24', 'login' => 'test23', 'email' => 'test24@testtest.com', 'status' => UserStatus::REGISTERD, 'must_change_password' => true],),
+            array_merge($user_template, ['name' => 'テストユーザ25', 'login' => 'test24', 'email' => 'test25@testtest.com', 'status' => UserStatus::REGISTERD, 'must_change_password' => false],),
+            array_merge($user_template, ['name' => 'テストユーザ26', 'login' => 'test25', 'email' => 'test26@testtest.com', 'status' => UserStatus::REGISTERD, 'must_change_password' => false],),
+            array_merge($user_template, ['name' => 'テストユーザ27', 'login' => 'test26', 'email' => 'test27@testtest.com', 'status' => UserStatus::LOCKED,    'must_change_password' => true],),
+            array_merge($user_template, ['name' => 'テストユーザ28', 'login' => 'test27', 'email' => 'test28@testtest.com', 'status' => UserStatus::LOCKED,    'must_change_password' => true],),
+            array_merge($user_template, ['name' => 'テストユーザ29', 'login' => 'test28', 'email' => 'test29@testtest.com', 'status' => UserStatus::LOCKED,    'must_change_password' => true],),
+            array_merge($user_template, ['name' => 'テストユーザ30', 'login' => 'test29', 'email' => 'test30@testtest.com', 'status' => UserStatus::LOCKED,    'must_change_password' => false],),
+            array_merge($user_template, ['name' => 'テストユーザ31', 'login' => 'test30', 'email' => 'test31@testtest.com', 'status' => UserStatus::LOCKED,    'must_change_password' => false],),
         ];
         foreach($users as $user)
         {
@@ -69,6 +70,70 @@ class TestSeeder extends Seeder
             $_user = User::whereLogin($user['login'])->first();
             $_user->must_change_password = $user['must_change_password'];
             $_user->save();
+        }
+        // groups
+        $group_template = ['type' => UserType::GROUP ];
+        $groups = [
+            array_merge($group_template, [ 'name' => 'テストグループ01' ],),
+            array_merge($group_template, [ 'name' => 'テストグループ02' ],),
+            array_merge($group_template, [ 'name' => 'テストグループ03' ],),
+            array_merge($group_template, [ 'name' => 'テストグループ04' ],),
+            array_merge($group_template, [ 'name' => 'テストグループ05' ],),
+            array_merge($group_template, [ 'name' => 'テストグループ06' ],),
+            array_merge($group_template, [ 'name' => 'テストグループ07' ],),
+            array_merge($group_template, [ 'name' => 'テストグループ08' ],),
+            array_merge($group_template, [ 'name' => 'テストグループ09' ],),
+            array_merge($group_template, [ 'name' => 'テストグループ10' ],),
+            array_merge($group_template, [ 'name' => 'テストグループ11' ],),
+            array_merge($group_template, [ 'name' => 'テストグループ12' ],),
+            array_merge($group_template, [ 'name' => 'テストグループ13' ],),
+            array_merge($group_template, [ 'name' => 'テストグループ14' ],),
+            array_merge($group_template, [ 'name' => 'テストグループ15' ],),
+            array_merge($group_template, [ 'name' => 'テストグループ16' ],),
+            array_merge($group_template, [ 'name' => 'テストグループ17' ],),
+            array_merge($group_template, [ 'name' => 'テストグループ18' ],),
+            array_merge($group_template, [ 'name' => 'テストグループ19' ],),
+            array_merge($group_template, [ 'name' => 'テストグループ20' ],),
+        ];
+        foreach($groups as $group)
+        {
+            User::updateOrCreate(
+                ['name' => $group['name'] ],
+                $group
+            );
+        }
+        // groups_users
+        $groups_users = [
+            [ 'group_id' => 'テストグループ01', 'user_id' => 'test01' ],
+            [ 'group_id' => 'テストグループ01', 'user_id' => 'test02' ],
+            [ 'group_id' => 'テストグループ01', 'user_id' => 'test03' ],
+            [ 'group_id' => 'テストグループ01', 'user_id' => 'test04' ],
+            [ 'group_id' => 'テストグループ01', 'user_id' => 'test05' ],
+            [ 'group_id' => 'テストグループ02', 'user_id' => 'test11' ],
+            [ 'group_id' => 'テストグループ02', 'user_id' => 'test12' ],
+            [ 'group_id' => 'テストグループ02', 'user_id' => 'test13' ],
+            [ 'group_id' => 'テストグループ02', 'user_id' => 'test14' ],
+            [ 'group_id' => 'テストグループ02', 'user_id' => 'test15' ],
+            [ 'group_id' => 'テストグループ03', 'user_id' => 'test01' ],
+            [ 'group_id' => 'テストグループ03', 'user_id' => 'test02' ],
+            [ 'group_id' => 'テストグループ03', 'user_id' => 'test03' ],
+            [ 'group_id' => 'テストグループ03', 'user_id' => 'test04' ],
+            [ 'group_id' => 'テストグループ03', 'user_id' => 'test05' ],
+            [ 'group_id' => 'テストグループ03', 'user_id' => 'test11' ],
+            [ 'group_id' => 'テストグループ04', 'user_id' => 'test12' ],
+            [ 'group_id' => 'テストグループ04', 'user_id' => 'test13' ],
+            [ 'group_id' => 'テストグループ04', 'user_id' => 'test14' ],
+            [ 'group_id' => 'テストグループ04', 'user_id' => 'test15' ],
+        ];
+        foreach($groups_users as $group_user)
+        {
+            $group_id = User::whereName($group_user['group_id'])->first()->id;
+            $user_id  = User::whereLogin($group_user['user_id'])->first()->id;
+            DB::table('groups_users')->upsert(
+                ['group_id' => $group_id, 'user_id' => $user_id],
+                ['group_id' => $group_id, 'user_id' => $user_id],
+                ['group_id' => $group_id, 'user_id' => $user_id],
+            );
         }
         // projects
         $project_template = [];
