@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
     <script src="{{ mix('js/app.js') }}" defer></script>
+    @livewireStyles
 </head>
 <body>
     <div id="app" class="d-flex flex-column">
@@ -100,5 +101,6 @@
             </div>
         </footer>
     </div>
+    @livewireScripts
 </body>
 </html>
