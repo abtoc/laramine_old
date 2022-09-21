@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Enums\UserStatus;
+use App\Enums\UserType;
 use App\Models\User;
 use App\Models\EmailAddress;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -21,6 +22,7 @@ class UserSeeder extends Seeder
         User::updateOrCreate(
             ['login' => 'admin'],
             [
+                'type' => UserType::USER,
                 'name' => 'Administrator',
                 'email' => 'admin@example.net',
                 'password' => Hash::make('admin'),
@@ -29,6 +31,43 @@ class UserSeeder extends Seeder
                 'must_change_password' => true,
             ]
         );
-        $user = User::where('login', 'admin')->first();
+
+        User::updateOrCreate(
+            ['login' => UserType::GROUP_ANONYMOUS->name],
+            [
+                'type' => UserType::GROUP_ANONYMOUS,
+                'name' => UserType::GROUP_ANONYMOUS->string(),
+                'email' => UserType::GROUP_ANONYMOUS->name,
+                'password' => Hash::make(UserType::GROUP_ANONYMOUS->name),
+                'admin' => false,
+                'status' => UserStatus::ACTIVE,
+                'must_change_password' => false,
+            ]
+        );
+
+        User::updateOrCreate(
+            ['login' => UserType::GROUP_NON_MEMBER->name],
+            [
+                'type' => UserType::GROUP_NON_MEMBER,
+                'name' => UserType::GROUP_NON_MEMBER->string(),
+                'email' => UserType::GROUP_NON_MEMBER->name,
+                'password' => Hash::make(UserType::GROUP_NON_MEMBER->name),
+                'admin' => false,
+                'status' => UserStatus::ACTIVE,
+                'must_change_password' => false,
+            ]
+        );
+        User::updateOrCreate(
+            ['login' => UserType::ANONYMOUS_USER->name],
+            [
+                'type' => UserType::ANONYMOUS_USER,
+                'name' => UserType::ANONYMOUS_USER->string(),
+                'email' => UserType::ANONYMOUS_USER->name,
+                'password' => Hash::make(UserType::ANONYMOUS_USER->name),
+                'admin' => false,
+                'status' => UserStatus::LOCKED,
+                'must_change_password' => false,
+            ]
+        );
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Enums\UserStatus;
+use App\Enums\UserType;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
@@ -69,6 +70,7 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
+            'type' => UserType::USER,
             'name' => $data['name'],
             'login' => $data['login'],
             'email' => $data['email'],

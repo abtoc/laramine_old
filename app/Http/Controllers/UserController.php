@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\UserStatus;
+use App\Enums\UserType;
 use App\Models\User;
 use App\Rules\IdentiferRule;
 use Illuminate\Http\Request;
@@ -14,14 +15,14 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
-        $query = User::sortable();
+        $query = User::where('type', UserType::USER);
         if($request->has('status') and $request->query('status') !== '0'){
             $query = $query->where('status', (int)($request->query('status')));
         }
         if($request->has('name') and $request->query('name') != null){
             $query = $query->where('name', 'LIKE', '%'.$request->query('name').'%');
         }
-        $users = $query->paginate(10);
+        $users = $query->sortable()->paginate(10);
         return view('users.index', compact('users'));
     }
 
@@ -40,6 +41,7 @@ class UserController extends Controller
         ]);
         $user = new User();
         $user->fill($request->all());
+        $user->type = UserType::USER;
         $user->password = Hash::make($request->input('password'));
         $user->save();
         return to_route('users.index', $request->query());
@@ -47,16 +49,25 @@ class UserController extends Controller
 
     public function show(User $user)
     {
+        if($user->type !== UserType::USER){
+            abort(404);
+        }        
         return view('users.show', compact('user'));
     }
 
     public function edit(User $user)
     {
+        if($user->type !== UserType::USER){
+            abort(404);
+        }        
         return view('users.edit', compact('user'));
     }
 
     public function update(Request $request,User $user)
     {
+        if($user->type !== UserType::USER){
+            abort(404);
+        }        
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'login' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($user->id), new LoginRule()],
@@ -69,6 +80,9 @@ class UserController extends Controller
 
     public function destroy(Request $request, User $user)
     {
+        if($user->type !== UserType::USER){
+            abort(404);
+        }        
         if(Auth::id() !== $user->id){
             $user->delete();
         }
@@ -77,7 +91,9 @@ class UserController extends Controller
 
     public function lock(Request $request, User $user)
     {
-
+        if($user->type !== UserType::USER){
+            abort(404);
+        }        
         if(Auth::id() !== $user->id){
             $user->status = UserStatus::LOCKED;
             $user->save();
@@ -87,6 +103,9 @@ class UserController extends Controller
 
     public function active(Request $request, User $user)
     {
+        if($user->type !== UserType::USER){
+            abort(404);
+        }        
         if(Auth::id() !== $user->id){
             $user->status = UserStatus::ACTIVE;
             $user->save();

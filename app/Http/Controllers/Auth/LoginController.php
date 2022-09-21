@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Enums\UserType;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -58,6 +60,10 @@ class LoginController extends Controller
      */
     protected function authenticated(Request $request, $user)
     {
+        if($user->type !== UserType::USER){
+            Auth::logout();
+            return redirect('login')->withErrors(['login' => trans('auth.failed')]);
+        }
         $user->last_login_at = now();
         $user->save();
     }
